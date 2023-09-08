@@ -32,5 +32,14 @@ private:
 	void LookUp(float AxisValue);
 	void LookRight(float AxisValue);
 	void Jump();
+	//For controller camera
+	void LookUpRate(float AxisValue);
+	void LookRightRate(float AxisValue);
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float Speed = 100;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float RotationRate = 100;
 
 };

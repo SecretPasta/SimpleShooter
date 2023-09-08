@@ -2,6 +2,7 @@
 
 
 #include "ShooterCharacter.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -34,14 +35,16 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &AShooterCharacter::LookUp);
 	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &AShooterCharacter::LookRight);
 	PlayerInputComponent->BindAction(TEXT("JUMP"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Jump);
+	PlayerInputComponent->BindAxis(TEXT("LookUpRate"), this, &AShooterCharacter::LookUpRate);
+	PlayerInputComponent->BindAxis(TEXT("LookRightRate"), this, &AShooterCharacter::LookRightRate);
 }
 
 void AShooterCharacter::MoveForward(float AxisValue) {
-	AddMovementInput(GetActorForwardVector()* AxisValue);
+	AddMovementInput(GetActorForwardVector() * AxisValue * Speed);
 }
 
 void AShooterCharacter::MoveRight(float AxisValue) {
-	AddMovementInput(GetActorRightVector()*AxisValue);
+	AddMovementInput(GetActorRightVector() * AxisValue  * Speed);
 }
 
 void AShooterCharacter::LookUp(float AxisValue) {
@@ -54,4 +57,12 @@ void AShooterCharacter::LookRight(float AxisValue) {
 
 void AShooterCharacter::Jump() {
 	ACharacter::Jump();
+}
+
+void AShooterCharacter::LookUpRate(float AxisValue) {
+	AddControllerPitchInput(AxisValue * UGameplayStatics::GetWorldDeltaSeconds(this) * RotationRate);
+}
+
+void AShooterCharacter::LookRightRate(float AxisValue) {
+	AddControllerYawInput(AxisValue * UGameplayStatics::GetWorldDeltaSeconds(this) * RotationRate);
 }
