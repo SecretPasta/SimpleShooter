@@ -26,6 +26,10 @@ void AShooterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	GetMesh()->HideBoneByName(TEXT("weapon_r"),EPhysBodyOp::PBO_None);
+	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform,TEXT("WeaponSocket"));
+	Gun->SetOwner(this);
+
 }
 
 // Called to bind functionality to input
@@ -39,6 +43,7 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction(TEXT("JUMP"), EInputEvent::IE_Pressed, this, &AShooterCharacter::Jump);
 	PlayerInputComponent->BindAxis(TEXT("LookUpRate"), this, &AShooterCharacter::LookUpRate);
 	PlayerInputComponent->BindAxis(TEXT("LookRightRate"), this, &AShooterCharacter::LookRightRate);
+	PlayerInputComponent->BindAction(TEXT("PullTrigger"), EInputEvent::IE_Pressed,this, &AShooterCharacter::Shoot);
 }
 
 void AShooterCharacter::MoveForward(float AxisValue) {
@@ -67,4 +72,8 @@ void AShooterCharacter::LookUpRate(float AxisValue) {
 
 void AShooterCharacter::LookRightRate(float AxisValue) {
 	AddControllerYawInput(AxisValue * UGameplayStatics::GetWorldDeltaSeconds(this) * RotationRate);
+}
+
+void AShooterCharacter::Shoot() {
+	Gun->PullTrigger();
 }

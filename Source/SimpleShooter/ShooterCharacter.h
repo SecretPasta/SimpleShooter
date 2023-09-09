@@ -37,6 +37,7 @@ private:
 	//For controller camera
 	void LookUpRate(float AxisValue);
 	void LookRightRate(float AxisValue);
+	void Shoot();
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float Speed = 100;
