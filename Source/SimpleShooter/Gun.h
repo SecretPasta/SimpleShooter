@@ -37,5 +37,8 @@ private:
 	class	UParticleSystem* MuzzleFlash;
 
 	UPROPERTY(EditAnywhere, Category = "Gun Stuff")
+	class	UParticleSystem* HitPoint;
+
+	UPROPERTY(EditAnywhere, Category = "Gun Stuff")
 	float MaxRange = 1000;
 };
