@@ -40,5 +40,8 @@ private:
 	class	UParticleSystem* HitPoint;
 
 	UPROPERTY(EditAnywhere, Category = "Gun Stuff")
-	float MaxRange = 1000;
+	float MaxRange = 1000.f;
+
+	UPROPERTY(EditAnywhere, Category = "Gun Stuff")
+	float Damage = 10.f;
 };
