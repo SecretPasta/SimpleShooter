@@ -3,6 +3,7 @@
 
 #include "ShooterCharacter.h"
 #include "Kismet/GameplayStatics.h"
+#include "Gun.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -17,6 +18,7 @@ void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
 }
 
 // Called every frame

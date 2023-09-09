@@ -28,6 +28,6 @@ private:
 	USceneComponent* Root;
 
 	UPROPERTY(VisibleAnywhere)
-	USkeletalMeshComponent* MeshComponent;
+  USkeletalMeshComponent* MeshComponent;
 
 };
