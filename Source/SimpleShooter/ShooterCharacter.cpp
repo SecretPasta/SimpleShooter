@@ -48,11 +48,16 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 }
 
 float AShooterCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) {
-	float DamageApplied = Super::TakeDamage(DamageAmount,DamageEvent,EventInstigator,DamageCauser);
-	DamageApplied = FMath::Min(DamageApplied, Health);
-	Health -= DamageApplied;
+	float DamageToApply = Super::TakeDamage(DamageAmount,DamageEvent,EventInstigator,DamageCauser);
+	DamageToApply = FMath::Min(DamageToApply, Health);
+	Health -= DamageToApply;
 	UE_LOG(LogTemp, Warning, TEXT("Health is now: %f"), Health);
-	return DamageApplied;
+	return DamageToApply;
+}
+
+bool AShooterCharacter::IsDead() const
+{
+	return Health == 0;
 }
 
 
