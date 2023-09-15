@@ -45,10 +45,10 @@ private:
 	void Shoot();
 
 	UPROPERTY(EditAnywhere, Category = "Character Stats")
-	float Speed = 100;
+	float Speed = 100.f;
 
 	UPROPERTY(EditAnywhere, Category = "Character Stats")
-	float RotationRate = 100;
+	float RotationRate = 100.f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Gun")
 	TSubclassOf<AGun> GunClass;
@@ -57,7 +57,7 @@ private:
 	AGun* Gun;
 
 	UPROPERTY(EditDefaultsOnly , Category = "Character Stats")
-	float MaxHealth = 100;
+	float MaxHealth = 100.f;
 
 	UPROPERTY(VisibleAnywhere, Category = "Character Stats")
 	float Health;

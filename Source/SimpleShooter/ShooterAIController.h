@@ -23,4 +23,7 @@ public:
 private:
 
 	APawn* PlayerPawn;
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI Stuff")
+	float AcceptanceRadius = 200.f;
 };
