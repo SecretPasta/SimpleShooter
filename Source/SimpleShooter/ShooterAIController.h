@@ -24,6 +24,12 @@ private:
 
 	APawn* PlayerPawn;
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI Stuff")
-	float AcceptanceRadius = 200.f;
+	/*UPROPERTY(EditDefaultsOnly, Category = "AI Stuff")
+	float AcceptanceRadius = 200.f;*/
+
+	UPROPERTY(EditAnywhere, Category = "AI Stuff")
+	class UBehaviorTree* AIBehavior;
+
+
+
 };
