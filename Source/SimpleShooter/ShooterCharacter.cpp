@@ -4,6 +4,7 @@
 #include "ShooterCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "Gun.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -52,12 +53,18 @@ float AShooterCharacter::TakeDamage(float DamageAmount, struct FDamageEvent cons
 	DamageToApply = FMath::Min(DamageToApply, Health);
 	Health -= DamageToApply;
 	UE_LOG(LogTemp, Warning, TEXT("Health is now: %f"), Health);
+
+	if (IsDead()) {
+		DetachFromControllerPendingDestroy();
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
+
 	return DamageToApply;
 }
 
 bool AShooterCharacter::IsDead() const
 {
-	return Health == 0;
+	return Health <= 0;
 }
 
 
