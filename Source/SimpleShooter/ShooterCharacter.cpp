@@ -19,6 +19,7 @@ void AShooterCharacter::BeginPlay()
 	Super::BeginPlay();
 	
 	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
+	Health = MaxHealth;
 }
 
 // Called every frame
@@ -45,6 +46,15 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAxis(TEXT("LookRightRate"), this, &AShooterCharacter::LookRightRate);
 	PlayerInputComponent->BindAction(TEXT("PullTrigger"), EInputEvent::IE_Pressed,this, &AShooterCharacter::Shoot);
 }
+
+float AShooterCharacter::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) {
+	float DamageApplied = Super::TakeDamage(DamageAmount,DamageEvent,EventInstigator,DamageCauser);
+	DamageApplied = FMath::Min(DamageApplied, Health);
+	Health -= DamageApplied;
+	UE_LOG(LogTemp, Warning, TEXT("Health is now: %f"), Health);
+	return DamageApplied;
+}
+
 
 void AShooterCharacter::MoveForward(float AxisValue) {
 	AddMovementInput(GetActorForwardVector() * AxisValue * Speed);

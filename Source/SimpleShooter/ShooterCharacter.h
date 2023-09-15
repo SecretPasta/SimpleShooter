@@ -28,6 +28,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
 private:
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
@@ -39,10 +41,10 @@ private:
 	void LookRightRate(float AxisValue);
 	void Shoot();
 
-	UPROPERTY(EditAnywhere, Category = "Movement")
+	UPROPERTY(EditAnywhere, Category = "Character Stats")
 	float Speed = 100;
 
-	UPROPERTY(EditAnywhere, Category = "Movement")
+	UPROPERTY(EditAnywhere, Category = "Character Stats")
 	float RotationRate = 100;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Gun")
@@ -50,4 +52,10 @@ private:
 
 	UPROPERTY()
 	AGun* Gun;
+
+	UPROPERTY(EditDefaultsOnly , Category = "Character Stats")
+	float MaxHealth = 100;
+
+	UPROPERTY(VisibleAnywhere, Category = "Character Stats")
+	float Health;
 };
