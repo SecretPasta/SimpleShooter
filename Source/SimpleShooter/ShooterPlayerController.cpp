@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 
 void AShooterPlayerController::BeginPlay() {
+	Super::BeginPlay();
 	UUserWidget* HUD = CreateWidget(this, HUDClass);
 	if (HUD != nullptr) {
 		HUD->AddToViewport();
