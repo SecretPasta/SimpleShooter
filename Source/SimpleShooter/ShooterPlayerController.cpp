@@ -2,8 +2,12 @@
 
 
 #include "ShooterPlayerController.h"
+#include "GameFramework/Actor.h"
 
 void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner) {
 	Super::GameHasEnded(EndGameFocus, bIsWinner);
 	UE_LOG(LogTemp, Warning, TEXT("We have finished!"));
+
+	GetWorldTimerManager().SetTimer(RestartTimer, this, &APlayerController::RestartLevel, RestartDelay);
+
 }
