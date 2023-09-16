@@ -59,20 +59,21 @@ AController* AGun::GetOwnerController() const
 {
 	APawn* OwnerPawn = Cast<APawn>(GetOwner());
 	if (OwnerPawn == nullptr) return nullptr;
-
 	return OwnerPawn->GetController();
 }
 
 void AGun::PullTrigger() {
 	UE_LOG(LogTemp, Warning, TEXT("Pew"));
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, MeshComponent, TEXT("MuzzleFlashSocket"));
+	UGameplayStatics::SpawnSoundAttached(MuzzleSound, MeshComponent, TEXT("MuzzleFlashSocket"));
+
 
 	FHitResult Hit;
 	FVector ShotDirection;
 	if (GunTrace(Hit, ShotDirection)) {
 		//DrawDebugPoint(GetWorld(), Hit.Location, 20, FColor::Red, true);
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(),HitPoint,Hit.Location,ShotDirection.Rotation());
-		
+		UGameplayStatics::SpawnSoundAtLocation(GetWorld(), HitSound, Hit.Location, ShotDirection.Rotation());
 		if (Hit.GetActor() != nullptr) {
 			FPointDamageEvent DamageEvent(Damage, Hit, ShotDirection, nullptr);
 			AController* OwnerController = GetOwnerController();

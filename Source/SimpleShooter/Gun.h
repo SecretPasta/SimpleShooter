@@ -40,6 +40,12 @@ private:
 	class	UParticleSystem* HitPoint;
 
 	UPROPERTY(EditAnywhere, Category = "Gun Stuff")
+	class USoundBase* MuzzleSound;
+
+	UPROPERTY(EditAnywhere, Category = "Gun Stuff")
+	class USoundBase* HitSound;
+
+	UPROPERTY(EditAnywhere, Category = "Gun Stuff")
 	float MaxRange = 1000.f;
 
 	UPROPERTY(EditAnywhere, Category = "Gun Stuff")
