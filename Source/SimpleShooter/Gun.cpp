@@ -63,7 +63,7 @@ AController* AGun::GetOwnerController() const
 }
 
 void AGun::PullTrigger() {
-	UE_LOG(LogTemp, Warning, TEXT("Pew"));
+	//UE_LOG(LogTemp, Warning, TEXT("%s: Pew"), *this->GetActorNameOrLabel());
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, MeshComponent, TEXT("MuzzleFlashSocket"));
 	UGameplayStatics::SpawnSoundAttached(MuzzleSound, MeshComponent, TEXT("MuzzleFlashSocket"));
 

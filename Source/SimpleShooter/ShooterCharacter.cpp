@@ -53,7 +53,7 @@ float AShooterCharacter::TakeDamage(float DamageAmount, struct FDamageEvent cons
 	float DamageToApply = Super::TakeDamage(DamageAmount,DamageEvent,EventInstigator,DamageCauser);
 	DamageToApply = FMath::Min(DamageToApply, Health);
 	Health -= DamageToApply;
-	UE_LOG(LogTemp, Warning, TEXT("Health is now: %f"), Health);
+	UE_LOG(LogTemp, Warning, TEXT("%s: Health: %f"),*this->GetActorNameOrLabel(), Health);
 
 	if (IsDead()) {
 		ASimpleShooterGameModeBase* GameMode = GetWorld()->GetAuthGameMode<ASimpleShooterGameModeBase>();

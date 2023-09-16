@@ -5,6 +5,13 @@
 #include "GameFramework/Actor.h"
 #include "Blueprint/UserWidget.h"
 
+void AShooterPlayerController::BeginPlay() {
+	UUserWidget* HUD = CreateWidget(this, HUDClass);
+	if (HUD != nullptr) {
+		HUD->AddToViewport();
+	}
+}
+
 void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner) {
 	Super::GameHasEnded(EndGameFocus, bIsWinner);
 	UE_LOG(LogTemp, Warning, TEXT("We have finished!"));
