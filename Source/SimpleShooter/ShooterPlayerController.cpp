@@ -7,7 +7,7 @@
 
 void AShooterPlayerController::BeginPlay() {
 	Super::BeginPlay();
-	UUserWidget* HUD = CreateWidget(this, HUDClass);
+	HUD = CreateWidget(this, HUDClass);
 	if (HUD != nullptr) {
 		HUD->AddToViewport();
 	}
@@ -16,7 +16,6 @@ void AShooterPlayerController::BeginPlay() {
 void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner) {
 	Super::GameHasEnded(EndGameFocus, bIsWinner);
 	UE_LOG(LogTemp, Warning, TEXT("We have finished!"));
-
 
 	if (bIsWinner) {
 		UUserWidget* WinScreen = CreateWidget(this, WinScreenClass);
@@ -27,9 +26,9 @@ void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner
 	else {
 		UUserWidget* LoseScreen = CreateWidget(this, LoseScreenClass);
 		if (LoseScreen != nullptr) {
+			HUD->RemoveFromViewport();
 			LoseScreen->AddToViewport();
 		}
 	}
-
 	GetWorldTimerManager().SetTimer(RestartTimer, this, &APlayerController::RestartLevel, RestartDelay);
 }
